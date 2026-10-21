@@ -90,6 +90,9 @@ Antes de colocar a mão na massa, vale entender alguns termos. Sem pressa, são 
 ## Passo 1 – Instalar a Arduino IDE
 
 1. Abra o navegador e acesse a página oficial: **<https://www.arduino.cc/en/software>**
+
+![alt](arduinoIDE.png)
+
 2. Procure a seção **Arduino IDE 2.x** (use sempre a versão 2 ou mais recente).
 3. Clique no download correspondente ao seu sistema:
    - **Windows** → *Win 10 and newer, 64 bits* (instalador `.exe`)
@@ -130,106 +133,78 @@ Antes de colocar a mão na massa, vale entender alguns termos. Sem pressa, são 
 ✅ **Como saber que deu certo?** A Arduino IDE abre mostrando um código com `void setup()` e `void loop()`.
 
 ---
+## Passo 1: Preparar a Arduino IDE e Pacote ESP32
 
-## Passo 2 – Ensinar a IDE a conhecer o ESP32
 
-Por padrão, a Arduino IDE conhece apenas placas Arduino. Precisamos instalar o **"pacote de suporte"** do ESP32.
 
-### 2.1 Adicionar o endereço do pacote ESP32
+Por padrão, a Arduino IDE reconhece apenas placas da família Arduino. Para trabalhar com o ESP32, precisamos adicionar o repositório da Espressif.
 
-1. Na Arduino IDE, abra as preferências:
-   - **Windows/Linux:** menu **File → Preferences**
-   - **macOS:** menu **Arduino IDE → Settings**
-2. Encontre o campo **"Additional boards manager URLs"** (URLs adicionais para o gerenciador de placas).
-3. Cole nele o seguinte endereço:
+### 1.1 Adicionar a URL do Pacote ESP32
 
-   ```
+1. Abra a **Arduino IDE**.
+![alt](arduinoIDETelainicial.png)
+2. Acesse as preferências do sistema:
+   - **Windows/Linux:** Menu `File` → `Preferences`
+   - **macOS:** Menu `Arduino IDE` → `Settings`
+   ![alt](preferencias.png)
+3. Localize o campo **"Additional boards manager URLs"** (*URLs Adicionais para o Gerenciador de Placas*).
+![alt](adicionarplacas.png)
+4. Cole a seguinte URL no campo:
+   ```text
    https://espressif.github.io/arduino-esp32/package_esp32_index.json
    ```
+   *(Nota: Se o campo já contiver outra URL, clique no ícone de janela ao lado e adicione este endereço em uma nova linha).*
+5. Clique em **OK** para salvar.
 
-   > Se o campo já tiver outro endereço, clique no ícone ao lado dele e cole o novo em uma **nova linha**.
-
-4. Clique em **OK**.
-
-### 2.2 Instalar o pacote ESP32
-
-1. Clique no ícone de **placa** na barra lateral esquerda (**Boards Manager**), ou use o menu **Tools → Board → Boards Manager...**
-2. Na caixa de busca, digite: **`esp32`**
-3. Localize o item **"esp32 by Espressif Systems"**.
-4. Clique em **INSTALL**.
-5. ⏳ Aguarde. O download tem algumas centenas de MB e **pode demorar vários minutos**. Uma barra de progresso aparece na parte inferior. Não feche a IDE.
-6. Quando terminar, aparecerá o texto **"INSTALLED"** no item.
-
-✅ **Como saber que deu certo?** O pacote "esp32 by Espressif Systems" aparece com a marcação **INSTALLED**.
 
 ---
 
-## Passo 3 – Instalar o driver USB
+### 1.2 Instalar as Placas ESP32
 
-Para o computador "conversar" com a placa, ele precisa de um driver. A maioria das placas ESP32 usa um destes dois chips de comunicação USB:
+1. No menu lateral esquerdo, clique no ícone do **Boards Manager** (Gerenciador de Placas) ou acesse via menu: `Tools` → `Board` → `Boards Manager...`.
+2. Na barra de busca, digite **`esp32`**.
+3. Localize a opção **"esp32 by Espressif Systems"** e clique no botão **INSTALL**.
+![alt](instalacao.png)
+4. Aguarde a conclusão do download e da instalação (pode levar alguns minutos).
+5. O status mudará para **"INSTALLED"**.
+![alt](instalado.png)
 
-| Chip | Como identificar |
-|---|---|
-| **CP2102 / CP210x** (Silicon Labs) | Escrito no chip pequeno perto da porta USB: "CP2102" |
-| **CH340 / CH341** (WCH) | Escrito no chip pequeno perto da porta USB: "CH340" |
-
-### Como saber se você precisa instalar?
-
-**Faça primeiro o Passo 4 (conectar a placa).** Se na etapa de escolher a porta (Passo 5) **aparecer uma porta nova**, o driver já está funcionando e você pode **pular este passo**. 🙂
-
-Se **não aparecer nenhuma porta**, instale o driver correspondente:
-
-- **CP210x:** busque por *"CP210x USB to UART Bridge VCP Drivers"* no site da Silicon Labs.
-- **CH340:** busque por *"CH340 driver"* no site do fabricante WCH.
-
-Depois de instalar, **reinicie o computador** e desconecte/reconecte a placa.
-
-> 💡 **Linux e macOS recentes** geralmente já reconhecem esses chips sem instalar nada.
 
 ---
 
-## Passo 4 – Conectar a placa ao computador
 
-1. Pegue a placa pelas **bordas** (evite tocar nos pinos e no chip).
-2. Conecte o cabo USB primeiro **na placa** e depois **no computador**.
-3. Observe a placa: normalmente um **LED vermelho** (indicador de energia) acende.
 
-> 🚫 **Cuidados:**
-> - Não apoie a placa sobre superfícies metálicas (pode causar curto-circuito).
-> - Não encoste em dois pinos ao mesmo tempo com fios soltos.
-> - Evite tocar a placa com as mãos muito úmidas.
+## Passo 2: Conectar a Placa com Segurança
 
----
+1. Segure a placa pelas **bordas laterais** para evitar tocar nos pinos ou no microcontrolador.
+2. Conecte o cabo USB primeiro na placa e depois na porta USB do computador.
+3. Observe se o **LED de alimentação (Power)** acendeu na placa (geralmente na cor vermelha ou azul).
+![alt](conexao.jpeg)
 
-## Passo 5 – Escolher a placa e a porta
 
-A IDE precisa saber **qual placa** você usa e **por qual porta USB** ela está conectada.
 
-### 5.1 Escolher a placa
+## Passo 4: Selecionar a Placa e a Porta na IDE
 
-1. Vá em **Tools → Board → esp32**.
-2. Selecione **ESP32 Dev Module**.
+Com a placa conectada, precisamos informar à Arduino IDE qual modelo estamos utilizando e em qual porta ela está comunicando.
 
-> 💡 Esta opção funciona para a grande maioria das placas ESP32 DevKit. Se a sua tem um nome específico (ex.: "DOIT ESP32 DEVKIT V1"), pode escolhê-lo na mesma lista, mas o **ESP32 Dev Module** costuma funcionar bem.
+### 4.1 Selecionar o Modelo da Placa
 
-### 5.2 Escolher a porta
-
-1. Vá em **Tools → Port**.
-2. Selecione a porta que apareceu **depois** de conectar a placa:
-   - **Windows:** algo como `COM3`, `COM4`, `COM5`...
-   - **macOS:** algo como `/dev/cu.usbserial-0001` ou `/dev/cu.SLAB_USBtoUART`
-   - **Linux:** algo como `/dev/ttyUSB0` ou `/dev/ttyACM0`
-
-> 🔎 **Não sabe qual é?** Abra o menu **Port**, anote as opções, **desconecte** a placa, abra o menu de novo e veja qual item **sumiu**. Essa é a sua porta. Reconecte e selecione-a.
-
-✅ **Como saber que deu certo?** Na parte superior da IDE, aparece o nome da placa e da porta escolhida.
+1. Acesse o menu: `Tools` → `Board` → `esp32`.
+![alt text](selecionarporta.png)
+2. Selecione a opção **ESP32 Dev Module**.
+   *(Esta opção é compatível com a grande maioria dos modelos DevKit do ESP32).*
+   ![alt text](placaeportra.png)
+![alt text](selecionadosportaeplaca.png)
 
 ---
 
+
+Se essa informação aparecer corretamente, seu ambiente está **pronto para gravar códigos no ESP32**!
 ## Passo 6 – Escrever o código Blink
 
-1. Na Arduino IDE, crie um novo sketch: **File → New Sketch**.
+1. Na Arduino IDE, crie um novo sketch: **File → New Sketch**. (na primeira vez pode pular esse passo)
 2. **Apague todo o conteúdo** que aparece na janela.
+![alt text](modificandocodigo.png)
 3. Cole o código abaixo:
 
 ```cpp
@@ -256,8 +231,9 @@ void loop() {
   delay(1000);                   // Espera mais 1 segundo
 }
 ```
-
+![alt text](codigoalterado.png)
 4. Salve o sketch: **File → Save** (atalho `Ctrl+S`). Dê um nome, por exemplo `blink_esp32`, e clique em salvar.
+![alt text](salvararquivo.png)
 
 > 📝 **Atenção a detalhes:** a linguagem diferencia maiúsculas de minúsculas (`delay` é diferente de `Delay`), e cada instrução termina com **ponto e vírgula** (`;`).
 
@@ -272,6 +248,7 @@ Clique no botão **✔ (Verify)** no canto superior esquerdo. A IDE confere se h
 ### 7.2 Enviar para a placa
 
 1. Clique no botão **→ (Upload)**, ao lado do ✔.
+![alt text](verificandoecompilando.png)
 2. Aguarde. Na parte inferior (janela de saída), você verá mensagens de compilação e depois porcentagens de envio:
 
    ```
@@ -281,8 +258,16 @@ Clique no botão **✔ (Verify)** no canto superior esquerdo. A IDE confere se h
    Writing at 0x00050000... (100 %)
    Hard resetting via RTS pin...
    ```
-
+![alt text](resultado.png)
 3. Quando terminar, a mensagem **"Done uploading"** aparece.
+
+### RESULTADO
+
+## Projeto em funcionamento
+
+## 🎥 Demonstração do projeto
+
+[▶️ REsultado](resultadoblink.mp4)
 
 ### 🔘 O truque do botão BOOT
 
