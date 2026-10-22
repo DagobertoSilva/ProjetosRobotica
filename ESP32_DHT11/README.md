@@ -26,8 +26,13 @@ O DHT11 é um sensor digital: ele mede temperatura e umidade e envia os valores 
 |------|--------|
 | ESP32 Dev Module (DevKit) | Placa que executará o programa |
 | Sensor DHT11 | Realiza as medições de temperatura e umidade |
-| Protoboard e jumpers | Fazem as ligações entre os componentes |
+| 3 jumpers fêmea - Fême | Fazem as ligações entre os componentes |
 | Cabo USB de dados | Alimenta o ESP32 e envia o código pelo computador |
+
+![ESP 32](ESP32.jpeg)
+![DHT11](DHT11.jpeg)
+![JUMPERSFF](JUMPERSFEMEAFEMEA.jpeg)
+
 
 > ⚠️ Use um cabo USB **de dados**. Cabos só de carga não permitem gravar o programa.
 
@@ -50,8 +55,10 @@ Usaremos o **GPIO 4** como pino de dados. Você pode usar outro GPIO adequado, d
 | Pino do DHT11 | Conectar ao ESP32 | Função |
 |---------------|-------------------|--------|
 | VCC (+) | 3V3 | Alimentação |
-| DATA (OUT / S) | GPIO 4 | Dados |
+| DATA (OUT / S) | D2 | Dados |
 | GND (−) | GND | Terra (referência elétrica) |
+
+![montagem](montagem.png)
 
 ### Atenções importantes
 
@@ -67,6 +74,8 @@ Usaremos o **GPIO 4** como pino de dados. Você pode usar outro GPIO adequado, d
 2. Clique no ícone **Library Manager** (ícone de livros, na barra lateral).
 3. Pesquise por `DHT sensor library` e instale a biblioteca cujo autor é **Adafruit**.
 4. Pesquise por `Adafruit Unified Sensor` e instale-a, caso ainda não esteja instalada (é uma dependência da biblioteca DHT).
+
+![biblioteca](biblioteca.png)
 
 ---
 
