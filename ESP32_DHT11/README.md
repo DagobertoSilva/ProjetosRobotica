@@ -159,10 +159,39 @@ Depois, siga a sequência:
 1. Conecte o ESP32 ao computador por USB.
 2. Clique em **Verificar** (✓) para compilar o código.
 3. Clique em **Carregar** (→) para enviar o programa.
-4. Se aparecer `Connecting...` e o upload travar, **mantenha o botão BOOT pressionado** até a gravação começar e então solte (veja a [seção 8](#8-erro-wrong-boot-mode-detected-0xb)).
+4. Se aparecer `Connecting...` e o upload travar e der erro, **desconecte todos os jumper do DHT11 e carregue o código no ESP32 novamente** até a gravação começar e então solte (veja a [seção 8](#8-erro-wrong-boot-mode-detected-0xb)).
 5. Ao terminar, abra o **Monitor Serial** e selecione **115200 baud**.
 
+Saída esperada quando a gravação deu certo
+
+```ino
+Changed data sectors found, fast reflashing...
+Reflashing 1 changed sector at 0x00010000...
+Flash will be erased from 0x00010000 to 0x00010fff...
+Compressed 4096 bytes to 1809...
+
+Writing at 0x00010000 [                              ]   0.0% 0/1809 bytes... 
+
+Writing at 0x00011000 [==============================] 100.0% 1809/1809 bytes... 
+Wrote 4096 bytes (1809 compressed) at 0x00010000 in 0.0 seconds (1200.5 kbit/s).
+Reflashing 1 changed sector at 0x00052000...
+Flash will be erased from 0x00052000 to 0x00052fff...
+Compressed 4096 bytes to 2636...
+
+Writing at 0x00052000 [                              ]   0.0% 0/2636 bytes... 
+
+Writing at 0x00053000 [==============================] 100.0% 2636/2636 bytes... 
+Wrote 4096 bytes (2636 compressed) at 0x00052000 in 0.1 seconds (513.2 kbit/s).
+Verifying written data...
+Hash of data verified.
+```
+
+### após dar certo faça as conexões dos jumper novamente no DHT11
 ---
+
+### abra o monitor serial para ver as informações de temperatura e humidade
+
+![Monitor Serial](monitorSerial.png)
 
 ## 6. Resultado no Monitor Serial
 
